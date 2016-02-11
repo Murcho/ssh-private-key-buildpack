@@ -10,7 +10,7 @@ function indent() {
 
 env_dir=$3
 ssh_key="$(cat $env_dir/SSH_KEY)"
-ssh_user="$(cat $env_dir/SSH_CONFIG)"
+ssh_key_id="$(cat $env_dir/SSH_KEY_ID)"
 
 if [ "$ssh_key" != "" ]; then
 	echo "-----> Running SSH private key setup"
@@ -18,7 +18,7 @@ if [ "$ssh_key" != "" ]; then
 	mkdir "$HOME/.ssh"
 	echo "$ssh_key" | base64 --decode > "$HOME/.ssh/id_rsa"
 	echo "Host git-codecommit.*.amazonaws.com
-  User $ssh_user
+  User $ssh_key_id
   IdentityFile $HOME/.ssh/id_rsa" > "$HOME/.ssh/config"
 	ssh -oStrictHostKeyChecking=no -T git@github.com 2>&1 | indent
 	exit 0

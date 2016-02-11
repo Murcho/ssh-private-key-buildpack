@@ -9,12 +9,12 @@ Upload the SSH Key ID from the AWS IAM portal.
 
 ```
 heroku config:set SSH_KEY=$(cat ~/.ssh/id_rsa | base64)
-heroku config:set SSH_USER=ABCDEFGHEXAMPLE
+heroku config:set SSH_KEY_ID=ABCDEFGHEXAMPLE
 ```
 
 Add a `.buildpacks` file (used by `heroku-buildpack-multi`) which contains this and the default node.js buildpack.
 
 ```
-https://github.com/Murcho/ssh-private-key-buildpack-aws-iam.git#v1.0.2
+https://github.com/Murcho/ssh-private-key-buildpack-aws-iam.git#v1.0.3
 https://github.com/heroku/heroku-buildpack-nodejs.git#v75
 ```
