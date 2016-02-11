@@ -23,7 +23,7 @@ if [ "$ssh_key" != "" ]; then
   User $ssh_key_id
   IdentityFile $HOME/.ssh/id_rsa" > "$HOME/.ssh/config"
   	eval `ssh-agent -s`
-  	ssh-add id_rsa
+  	ssh-add $HOME/.ssh/id_rsa
 	ssh -oStrictHostKeyChecking=no -T git@github.com 2>&1 | indent
 	exit 0
 else
