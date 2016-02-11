@@ -10,7 +10,6 @@ function indent() {
 
 env_dir=$3
 ssh_key="$(cat $env_dir/SSH_KEY)"
-ssh_key_pass="$(cat $env_dir/SSH_KEY_PASS)"
 ssh_key_pub="$(cat $env_dir/SSH_KEY_PUB)"
 ssh_key_id="$(cat $env_dir/SSH_KEY_ID)"
 
@@ -25,7 +24,6 @@ if [ "$ssh_key" != "" ]; then
   IdentityFile $HOME/.ssh/id_rsa" > "$HOME/.ssh/config"
   	eval `ssh-agent -s`
   	ssh-add $HOME/.ssh/id_rsa
-  	ssh_key_pass
 	ssh -oStrictHostKeyChecking=no -T git@github.com 2>&1 | indent
 	exit 0
 else
