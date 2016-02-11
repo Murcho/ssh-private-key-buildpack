@@ -15,6 +15,6 @@ heroku config:set SSH_USER=ABCDEFGHEXAMPLE
 Add a `.buildpacks` file (used by `heroku-buildpack-multi`) which contains this and the default node.js buildpack.
 
 ```
-https://github.com/debitoor/ssh-private-key-buildpack.git#v1.0.0
+https://github.com/Murcho/ssh-private-key-buildpack-aws-iam.git#v1.0.2
 https://github.com/heroku/heroku-buildpack-nodejs.git#v75
 ```
