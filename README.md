@@ -1,4 +1,4 @@
-# ssh-private-key-buildpack
+# ssh-private-key-buildpack-aws-iam
 
 A heroku buildpack for setting the private ssh key as part of the application build for use with AWS IAM users. It's meant to be used with [heroku-buildpack-multi](https://github.com/heroku/heroku-buildpack-multi), before other buildpacks which require the key to be present, like installing private `npm` modules from `github`.
 
