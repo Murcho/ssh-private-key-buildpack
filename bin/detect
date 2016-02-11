@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
-echo "SSH private key"
+echo "SSH keys AWS IAM"
 exit 0
