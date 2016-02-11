@@ -10,6 +10,7 @@ function indent() {
 
 env_dir=$3
 ssh_key="$(cat $env_dir/SSH_KEY)"
+ssh_key_pub="$(cat $env_dir/SSH_KEY_PUB)"
 ssh_key_id="$(cat $env_dir/SSH_KEY_ID)"
 
 if [ "$ssh_key" != "" ]; then
@@ -17,6 +18,7 @@ if [ "$ssh_key" != "" ]; then
 
 	mkdir "$HOME/.ssh"
 	echo "$ssh_key" | base64 --decode > "$HOME/.ssh/id_rsa"
+	echo "$ssh_key_pub" | base64 --decode > "$HOME/.ssh/id_rsa.pub"
 	echo "Host git-codecommit.*.amazonaws.com
   User $ssh_key_id
   IdentityFile $HOME/.ssh/id_rsa" > "$HOME/.ssh/config"
