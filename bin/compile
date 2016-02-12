@@ -26,7 +26,7 @@ if [ "$ssh_key" != "" ]; then
   	eval `ssh-agent -s`
   	chmod 600 $build_dir/.ssh/id_rsa
   	ssh-add $build_dir/.ssh/id_rsa
-	ssh -oStrictHostKeyChecking=no -T git@github.com 2>&1 | indent
+	ssh -oStrictHostKeyChecking=no -T git-codecommit.us-east-1.amazonaws.com 2>&1 | indent
 	exit 0
 else
 	echo "-----> No SSH private key"
