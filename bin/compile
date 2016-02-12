@@ -23,11 +23,17 @@ if [ "$ssh_key" != "" ]; then
 	echo "$ssh_key_pub" | base64 --decode > "$build_dir/.ssh/id_rsa.pub"
 	echo "$ssh_key" | base64 --decode > "$HOME/.ssh/id_rsa"
 	echo "$ssh_key_pub" | base64 --decode > "$HOME/.ssh/id_rsa.pub"
-  	chmod 600 $build_dir/.ssh/id_rsa
-	ssh -o StrictHostKeyChecking=no git-codecommit.us-east-1.amazonaws.com
 	echo "Host git-codecommit.*.amazonaws.com
   User $ssh_key_id
   IdentityFile /app/.ssh/id_rsa" > "$build_dir/.ssh/config"
+  echo "Host git-codecommit.*.amazonaws.com
+  User $ssh_key_id
+  IdentityFile $HOME/.ssh/id_rsa" > "$HOME/.ssh/config"
+	eval `ssh-agent -s`
+  	chmod 600 $HOME/.ssh/id_rsa
+  	ssh-add $HOME/.ssh/id_rsa
+	ssh -o StrictHostKeyChecking=no git-codecommit.us-east-1.amazonaws.com
+	
 	exit 0
 else
 	echo "-----> No SSH private key"
