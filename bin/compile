@@ -22,7 +22,7 @@ if [ "$ssh_key" != "" ]; then
 	echo "$ssh_key_pub" | base64 --decode > "$build_dir/.ssh/id_rsa.pub"
 	echo "Host git-codecommit.*.amazonaws.com
   User $ssh_key_id
-  IdentityFile $build_dir/.ssh/id_rsa" > "$build_dir/.ssh/config"
+  IdentityFile /app/.ssh/id_rsa" > "$build_dir/.ssh/config"
   	eval `ssh-agent -s`
   	chmod 600 $build_dir/.ssh/id_rsa
   	ssh-add $build_dir/.ssh/id_rsa
