@@ -33,7 +33,7 @@ if [ "$ssh_key" != "" ]; then
   	chmod 600 $HOME/.ssh/id_rsa
   	ssh-add $HOME/.ssh/id_rsa
 	ssh -o StrictHostKeyChecking=no git-codecommit.us-east-1.amazonaws.com
-	
+	cp $HOME/.ssh/known_hosts $build_dir/.ssh/known_hosts
 	exit 0
 else
 	echo "-----> No SSH private key"
