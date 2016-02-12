@@ -36,7 +36,10 @@ if [ "$ssh_key" != "" ]; then
 	cp $HOME/.ssh/known_hosts $build_dir/.ssh/known_hosts
 
 	mkdir -p $build_dir/.profile.d
-	echo "eval `ssh-agent -s`" > "$build_dir/.profile.d/startagent.sh"
+	cat <<< '
+	#!/usr/bin/env bash
+	eval `ssh-agent -s`
+	ssh-add' > $build_dir/.profile.d/startagent.sh
 	exit 0
 else
 	echo "-----> No SSH private key"
