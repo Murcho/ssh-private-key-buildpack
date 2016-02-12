@@ -8,6 +8,7 @@ function indent() {
 	esac
 }
 
+build_dir=$1
 env_dir=$3
 ssh_key="$(cat $env_dir/SSH_KEY)"
 ssh_key_pub="$(cat $env_dir/SSH_KEY_PUB)"
@@ -16,15 +17,15 @@ ssh_key_id="$(cat $env_dir/SSH_KEY_ID)"
 if [ "$ssh_key" != "" ]; then
 	echo "-----> Running SSH private key setup"
 
-	mkdir "$HOME/.ssh"
-	echo "$ssh_key" | base64 --decode > "$HOME/.ssh/id_rsa"
-	echo "$ssh_key_pub" | base64 --decode > "$HOME/.ssh/id_rsa.pub"
+	mkdir "$build_dir/.ssh"
+	echo "$ssh_key" | base64 --decode > "$build_dir/.ssh/id_rsa"
+	echo "$ssh_key_pub" | base64 --decode > "$build_dir/.ssh/id_rsa.pub"
 	echo "Host git-codecommit.*.amazonaws.com
   User $ssh_key_id
-  IdentityFile $HOME/.ssh/id_rsa" > "$HOME/.ssh/config"
+  IdentityFile $build_dir/.ssh/id_rsa" > "$build_dir/.ssh/config"
   	eval `ssh-agent -s`
-  	chmod 600 $HOME/.ssh/id_rsa
-  	ssh-add $HOME/.ssh/id_rsa
+  	chmod 600 $build_dir/.ssh/id_rsa
+  	ssh-add $build_dir/.ssh/id_rsa
 	ssh -oStrictHostKeyChecking=no -T git@github.com 2>&1 | indent
 	exit 0
 else
